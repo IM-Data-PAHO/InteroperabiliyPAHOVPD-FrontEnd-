@@ -1,0 +1,74 @@
+
+
+
+<div class="body">
+    <div class="card">
+        <mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
+        <form [formGroup]="form" *ngIf="!loading">
+            <mat-horizontal-stepper>
+                <mat-step label="Seleccione un programa">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Seleccione un programa</mat-label>
+                        <mat-select formControlName="program">
+                            <mat-option *ngFor="let opt of selectProgramsOptions" [value]="opt.programid">
+                              {{opt.programname}}
+                            </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <div>
+                        <button mat-button matStepperNext>Next</button>
+                      </div>
+                </mat-step>
+                <mat-step label="Cargar CSV">
+                  <div><mat-label>Cargar CSV(Clinical and Vaccination / Investigation / Clasification)</mat-label></div>
+                  <div> <input class="btn" (change)="onFileSelected($event)"  requiredFiel formControlName="attachment" #fileInput type="file" id="file"></div>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                    <button mat-button matStepperNext>Next</button>
+                  </div>
+                </mat-step>
+                <!-- <mat-step label="Cargar CSV(Laboratory)">
+                  <div><mat-label>Cargar CSV(Laboratory)</mat-label></div>
+                    <input class="btn" (change)="onFileSelected($event)"  formControlName="attachment" #fileInput type="file" id="file01">
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext>Next</button>
+                    </div> -->
+                <!-- </mat-step> -->
+                <mat-step label="Periodo">
+                    <div>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Periodo Inicial</mat-label>
+                        <mat-select formControlName="startdate" (selectionChange)="selectdate($event.value)">
+                          <mat-option  *ngFor="let opt of selectPeriod" [value]="opt.id">
+                            {{opt.id}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <mat-form-field appearance="fill">
+                        <mat-label>Periodo Final</mat-label>
+                        <mat-select formControlName="enddate" (selectionChange)="selectdate($event.value)">
+                          <mat-option  *ngFor="let opt of selectPeriod" [value]="opt.id">
+                            {{opt.id}}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                      <button mat-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+                <mat-step label="Cargar">
+                  <button mat-raised-button color="primary" class="loginElement button" type="submit" (click)="onUpload()" [disabled]="form.invalid" >Procesar</button>
+                    <div>
+                      <button mat-button matStepperPrevious>Back</button>
+                    </div>
+                </mat-step>
+
+            </mat-horizontal-stepper>
+        </form>
+    </div>
+</div>
