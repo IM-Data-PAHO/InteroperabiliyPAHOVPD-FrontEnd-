@@ -5,6 +5,7 @@ import { from } from 'rxjs';
 import { Programs, selectPrograms,Program, periodo } from 'src/app/shared/Models/selectPrograms';
 import { LoginService } from 'src/app/shared/services/login/login.service';
 import { UploaderService } from 'src/app/shared/services/uploader/uploader.service';
+import { TranslateService } from '@ngx-translate/core';
 import swal from'sweetalert2';
 @Component({
   selector: 'app-uploader',
@@ -23,7 +24,7 @@ export class UploaderComponent implements OnInit {
   loading=false;
 
 
-  constructor(private _uploaderService : UploaderService, private fb: FormBuilder, private _login : LoginService) {
+  constructor(private _uploaderService : UploaderService, private fb: FormBuilder, private _login : LoginService, public translate: TranslateService) {
     this.form = this.fb.group({
       program: ['', Validators.required],
       attachment: ['', Validators.required],
@@ -53,6 +54,7 @@ export class UploaderComponent implements OnInit {
     // else   
     //    console.log(item+' : '+(item+1))
     //    console.log(this.form.value.startdate)
+    this.onValidationDate();
     console.log(item)
   }
   loadSelectPrograms(){
@@ -79,19 +81,29 @@ export class UploaderComponent implements OnInit {
     //console.log("result: "+ JSON.stringify(result))
       let mensaje = '';
       if (!result){
-         mensaje = 'El archivo se proceso Exitosamente';
-         this.loading=false;
-         return swal.fire(mensaje);
+        //  mensaje = 'El archivo se proceso Exitosamente';
+        //  this.loading=false;
+        //  return swal.fire(mensaje);
+        this.loading=false;
+        this.translate.get('The file was successfully processed').subscribe((res: string) => {
+          swal.fire(res);
+        });
       }
       for (let i in result )
         {
           mensaje = mensaje + result[i].errorMessage + '\n ' ; 
         }
         this.loading=false;
-       return swal.fire('No se pudo procesar el archivo  por los siguientes motivos: \n'+ mensaje);
+        this.translate.get('The file could not be processed for the following reasons' + mensaje).subscribe((res: string) => {
+          swal.fire(res);
+        });
+      //  return swal.fire('No se pudo procesar el archivo  por los siguientes motivos: \n'+ mensaje);
     },error=>{
       this.loading=false;
-      return swal.fire('Ocurrio un error Intente de nuevo');
+      this.translate.get('An error occurred Please try again').subscribe((res: string) => {
+        swal.fire(res);
+      });
+      // return swal.fire('Ocurrio un error Intente de nuevo');
     })
 
   }
@@ -102,4 +114,14 @@ export class UploaderComponent implements OnInit {
       this.uploadFile01 = e.target.files;
   }
 
+  onValidationDate(){
+    if(this.form.value.enddate){
+      if(this.form.value.enddate<this.form.value.startdate){
+        this.loading=false;
+        this.translate.get('End date cannot be greater than start date').subscribe((res: string) => {
+          swal.fire(res);
+        });
+      }
+    }
+  }
 }

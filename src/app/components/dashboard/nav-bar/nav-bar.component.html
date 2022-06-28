@@ -1,10 +1,10 @@
 <mat-toolbar color="primary">
-    <span>App Impodatos</span>
+    <span>{{ 'App Impodata' | translate }}</span>
     <span class="menu-spacer"></span>
-    <button mat-button routerLink="/dashboard" >Subir Archivo</button>
-    <button mat-button routerLink="/dashboard/history" >Historial</button>
+    <button mat-button routerLink="/dashboard">{{ 'Upload file' | translate }}</button>
+    <button mat-button routerLink="/dashboard/history">{{ 'History' | translate }}</button>
     <span class="menu-spacer"></span>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()" >
+    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon" (click)="logout()">
         <mat-icon>logout</mat-icon>
       </button>
 </mat-toolbar>

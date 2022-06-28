@@ -1,0 +1,31 @@
+{
+    "Select a program": "Select a program",
+    "Upload CVS": "Upload CVS",
+    "Period": "Period",
+    "Load": "Load",
+    "Back": "Back",
+    "Next": "Next",
+    "Upload CSV(Clinical and Vaccination / Investigation / Classification)": "Upload CSV(Clinical and Vaccination / Investigation / Classification)",
+    "Initial Period": "Initial Period",
+    "Final Period": "Final Period",
+    "Upload file": "Upload file",
+    "History": "History",
+    "App Impodata": "App Impodata",
+    "Process": "Process",
+    "Filter": "Filter",
+    "ID Register": "ID Register",
+    "ID Program": "ID Program",
+    "User": "User",
+    "Date": "Date",
+    "State": "State",
+    "Download": "Download",
+    "Select page of users": "Select page of users",
+    "Items per page": "Items per page",
+    "Logout": "Logout",
+    "End date cannot be greater than start date": "End date cannot be greater than start date",
+    "An error occurred Please try again": "An error occurred Please try again",
+    "The file could not be processed for the following reasons:": "The file could not be processed for the following reasons: \n",
+    "The file was successfully processed": "The file was successfully processed"
+
+
+}
