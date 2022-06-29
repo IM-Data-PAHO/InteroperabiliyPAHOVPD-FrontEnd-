@@ -6,6 +6,7 @@ import { CookieService } from "ngx-cookie-service";
 import { Router } from '@angular/router';
 import { LoginResponse } from '../../Models/LoginResponse';
 import { login } from '../../Models/login';
+import { userSettings } from '../../Models/userSettings';
 
 
 @Injectable({
@@ -24,6 +25,10 @@ export class LoginService {
     var response =  this._http.post<LoginResponse>(Connection.ENDPOINTBACK + 'Login/getUser', user);
     return response; 
   }
+  getlanguage(token: string): Observable<userSettings> {
+    var response = this._http.get<userSettings>(Connection.ENDPOINTBACK + 'Login/getUserSetting/' + token);
+    return response;   
+  } 
 
   setToken(token: string, user: string){
     this._cookieService.set("token", token);
