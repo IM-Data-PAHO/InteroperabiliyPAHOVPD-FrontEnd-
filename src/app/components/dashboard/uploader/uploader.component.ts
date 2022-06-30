@@ -55,7 +55,7 @@ export class UploaderComponent implements OnInit {
     //    console.log(item+' : '+(item+1))
     //    console.log(this.form.value.startdate)
     this.onValidationDate();
-    console.log(item)
+    // console.log(item)
   }
   loadSelectPrograms(){
     this._uploaderService.getSelectProgram().subscribe(data =>{
@@ -64,7 +64,50 @@ export class UploaderComponent implements OnInit {
 
     })
   }
-  
+  onPreupload(){
+    this.loading=true;
+    const file: File = this.uploadFile[0];
+   // const file01: File = this.uploadFile01[0];
+    let formData = new FormData();
+    formData.append('Programsid', this.form.value.program);
+    formData.append( 'CsvFile', file, file.name);
+    // formData.append( 'CsvFile01', file01, file01.name);
+    formData.append( 'UserLogin',  this._login.getUsuario() );
+    formData.append( 'startdate', this.form.value.startdate);
+    formData.append( 'enddate', this.form.value.enddate);
+    formData.append( 'token', this._login.getToken() );
+    this._uploaderService.preuploadFile(formData).subscribe(result =>{
+    console.log("result: "+ JSON.stringify(result))
+      let mensaje = '';
+      if (!result){
+        //  mensaje = 'El archivo se proceso Exitosamente';
+        //  this.loading=false;
+        //  return swal.fire(mensaje);
+        this.loading=false;
+        this.translate.get('The file was successfully processed').subscribe((res: string) => {
+          swal.fire(res);
+        });
+      }
+      for (let i in result )
+        {
+          mensaje = mensaje + result[i].errorMessage + '\n ' ; 
+          console.log(result[i])
+        }
+        this.loading=false;
+        this.translate.get('The file could not be processed for the following reasons' + mensaje).subscribe((res: string) => {
+          swal.fire(res);
+        });
+      //  return swal.fire('No se pudo procesar el archivo  por los siguientes motivos: \n'+ mensaje);
+    },error=>{
+      this.loading=false;
+      this.translate.get('An error occurred Please try again').subscribe((res: string) => {
+        swal.fire(res);
+      });
+      // return swal.fire('Ocurrio un error Intente de nuevo');
+    })
+
+  }
+
   onUpload(){
     this.loading=true;
     const file: File = this.uploadFile[0];

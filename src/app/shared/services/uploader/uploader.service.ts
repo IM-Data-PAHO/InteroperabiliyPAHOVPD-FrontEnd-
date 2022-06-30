@@ -23,6 +23,11 @@ export class UploaderService {
     return this._http.post<any>(Connection.ENDPOINTBACK + 'history', param);
       
   }
+  preuploadFile(param: any) : Observable<any>{
+    console.log("Post: startDryRun")
+    return this._http.post<any>(Connection.ENDPOINTBACK + 'DhisIntegration/startDryRun', param);
+      
+  }
 
   getHistoryUser(user: string) : Observable<History[]>{
  

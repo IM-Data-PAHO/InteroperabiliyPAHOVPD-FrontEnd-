@@ -62,6 +62,12 @@
                         <button mat-button matStepperNext>{{ 'Next' | translate }}</button>
                     </div>
                 </mat-step>
+                <mat-step label="{{ 'Preload' | translate }}">
+                    <button mat-raised-button color="primary" class="loginElement button" type="submit" (click)="onPreupload()" [disabled]="form.invalid">{{ 'Validate' | translate }}</button>
+                    <div>
+                        <button mat-button matStepperPrevious>{{ 'Next' | translate }}</button>
+                    </div>
+                </mat-step>
                 <mat-step label="{{ 'Load' | translate }}">
                     <button mat-raised-button color="primary" class="loginElement button" type="submit" (click)="onUpload()" [disabled]="form.invalid">{{ 'Process' | translate }}</button>
                     <div>
