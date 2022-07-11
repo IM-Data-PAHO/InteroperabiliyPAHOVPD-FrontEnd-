@@ -87,14 +87,17 @@ export class UploaderComponent implements OnInit {
     formData.append( 'token', this._login.getToken() );
     this._uploaderService.preuploadFile(formData).subscribe(result =>{
     //console.log("result: "+ JSON.stringify(result))
-    //console.log("result: "+ result)
-
-     this.listresponse = result;
-     console.log("result: "+ JSON.stringify(this.listresponse.response))
-     this.ValidateDto = this.listresponse.response;
-     this.dataSource= new MatTableDataSource(this.ValidateDto);
-     this.dataSource.paginator = this.paginator;
-     this.dataSource.sort = this.sort;
+    let mensaje = '';
+    // if (!result){
+      this.loading=false;
+      this.listresponse = result;
+      this.ValidateDto = this.listresponse.response;
+      console.log("result: "+ JSON.stringify(this.listresponse.response));
+      this.dataSource= new MatTableDataSource(this.ValidateDto);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      this.translate.get('The file was successfully processed').subscribe((res: string) => { swal.fire(res); });
+    // }
 
     },error=>{
       this.loading=false;

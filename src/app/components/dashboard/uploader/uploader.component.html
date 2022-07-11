@@ -62,37 +62,40 @@
                 </mat-step>
                 <mat-step label="{{ 'Preload' | translate }}">
                     <button mat-raised-button color="primary" class="loginElement button" type="submit" (click)="onPreupload()" [disabled]="form.invalid">{{ 'Validate' | translate }}</button>
-                    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-                        <!-- Position Column -->
-                        <ng-container matColumnDef="ln">
-                          <th mat-header-cell *matHeaderCellDef> No. </th>
-                          <td mat-cell *matCellDef="let element"> {{element.ln}} </td>
-                        </ng-container>
-                      
-                        <!-- Name Column -->
-                        <ng-container matColumnDef="cl">
-                          <th mat-header-cell *matHeaderCellDef> Name </th>
-                          <td mat-cell *matCellDef="let element"> {{element.cl}} </td>
-                        </ng-container>
-                      
-                        <!-- Weight Column -->
-                        <ng-container matColumnDef="ms">
-                          <th mat-header-cell *matHeaderCellDef> Weight </th>
-                          <td mat-cell *matCellDef="let element"> {{element.ms}} </td>
-                        </ng-container>
-                      
-                        <!-- Symbol Column -->
-                        <ng-container matColumnDef="value">
-                          <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                          <td mat-cell *matCellDef="let element"> {{element.value}} </td>
-                        </ng-container>
-                      
-                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                      </table>
-                      
+                    <div class="container">
+                        <div class="mat-elevation-z8">
+                            <table mat-table [dataSource]="dataSource" matSort>
+                    
+                                <ng-container matColumnDef="ln">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ln </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.ln}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="cl">
+                                    <th mat-header-cell *matHeaderCellDef  mat-sort-header> cl </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.cl}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="ms">
+                                    <th mat-header-cell *matHeaderCellDef  mat-sort-header> message </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.ms}} </td>
+                                </ng-container>
+                    
+                                <ng-container matColumnDef="value">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> value </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.value | date:'dd-MM-yyyy HH:mm:ss'}} </td>
+                                </ng-container>
+                    
+                                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                            </table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                        </div>
+                    
+                    </div>                   
                     <div>
-                        <button mat-button matStepperPrevious>{{ 'Next' | translate }}</button>
+                        <button mat-button matStepperPrevious>{{ 'Back' | translate }}</button>
+                        <button mat-button matStepperNext>{{ 'Next' | translate }}</button>
                     </div>
                 </mat-step>
                 <mat-step label="{{ 'Load' | translate }}">
