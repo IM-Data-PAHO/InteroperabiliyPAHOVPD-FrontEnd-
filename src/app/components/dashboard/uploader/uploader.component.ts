@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { matFormFieldAnimations } from '@angular/material/form-field';
 import { from } from 'rxjs';
-import { Programs, selectPrograms,Program, periodo } from 'src/app/shared/Models/selectPrograms';
+import { Programs, selectPrograms,Program, periodo, Responsepreload, ValidateDto } from 'src/app/shared/Models/selectPrograms';
 import { LoginService } from 'src/app/shared/services/login/login.service';
 import { UploaderService } from 'src/app/shared/services/uploader/uploader.service';
 import { TranslateService } from '@ngx-translate/core';
 import swal from'sweetalert2';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+
+
 @Component({
   selector: 'app-uploader',
   templateUrl: './uploader.component.html',
@@ -14,6 +19,7 @@ import swal from'sweetalert2';
 })
 
 export class UploaderComponent implements OnInit {
+  listresponse!: Responsepreload;
   selectProgramsOptions!: Program[];
   selectPeriod!: periodo[];
   form: FormGroup;
@@ -22,8 +28,11 @@ export class UploaderComponent implements OnInit {
   uploadFile01!: Array<File>
   file01!: File; 
   loading=false;
-
-
+  displayedColumns: string[] = ['ln', 'cl', 'ms', 'value'];
+  ValidateDto! :  ValidateDto[];
+  dataSource = new MatTableDataSource(this.ValidateDto);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   constructor(private _uploaderService : UploaderService, private fb: FormBuilder, private _login : LoginService, public translate: TranslateService) {
     this.form = this.fb.group({
       program: ['', Validators.required],
@@ -77,27 +86,16 @@ export class UploaderComponent implements OnInit {
     formData.append( 'enddate', this.form.value.enddate);
     formData.append( 'token', this._login.getToken() );
     this._uploaderService.preuploadFile(formData).subscribe(result =>{
-    console.log("result: "+ JSON.stringify(result))
-      let mensaje = '';
-      if (!result){
-        //  mensaje = 'El archivo se proceso Exitosamente';
-        //  this.loading=false;
-        //  return swal.fire(mensaje);
-        this.loading=false;
-        this.translate.get('The file was successfully processed').subscribe((res: string) => {
-          swal.fire(res);
-        });
-      }
-      for (let i in result )
-        {
-          mensaje = mensaje + result[i].errorMessage + '\n ' ; 
-          console.log(result[i])
-        }
-        this.loading=false;
-        this.translate.get('The file could not be processed for the following reasons' + mensaje).subscribe((res: string) => {
-          swal.fire(res);
-        });
-      //  return swal.fire('No se pudo procesar el archivo  por los siguientes motivos: \n'+ mensaje);
+    //console.log("result: "+ JSON.stringify(result))
+    //console.log("result: "+ result)
+
+     this.listresponse = result;
+     console.log("result: "+ JSON.stringify(this.listresponse.response))
+     this.ValidateDto = this.listresponse.response;
+     this.dataSource= new MatTableDataSource(this.ValidateDto);
+     this.dataSource.paginator = this.paginator;
+     this.dataSource.sort = this.sort;
+
     },error=>{
       this.loading=false;
       this.translate.get('An error occurred Please try again').subscribe((res: string) => {

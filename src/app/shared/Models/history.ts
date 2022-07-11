@@ -10,3 +10,4 @@ export interface History{
   fecha: string;
   file: Byte[];
 }
+

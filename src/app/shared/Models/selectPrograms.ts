@@ -23,3 +23,16 @@ export interface Attributemapping {
     name:   string;
     column: string;
 }
+
+export interface Responsepreload{
+    uploads: number;
+    deleted: number;
+    response: ValidateDto[];
+    state: string;
+  }
+  export interface ValidateDto{
+    ln: number;
+    cl: number;
+    ms: string;
+    value: string;
+  }
