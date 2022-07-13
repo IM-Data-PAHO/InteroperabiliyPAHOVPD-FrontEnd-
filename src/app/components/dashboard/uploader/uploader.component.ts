@@ -28,7 +28,7 @@ export class UploaderComponent implements OnInit {
   uploadFile01!: Array<File>
   file01!: File; 
   loading=false;
-  displayedColumns: string[] = ['ln', 'cl', 'ms', 'value'];
+  displayedColumns: string[] = ['detail','ln', 'cl', 'ms', 'value'];
   ValidateDto! :  ValidateDto[];
   dataSource = new MatTableDataSource(this.ValidateDto);
   @ViewChild(MatPaginator) paginator!: MatPaginator;

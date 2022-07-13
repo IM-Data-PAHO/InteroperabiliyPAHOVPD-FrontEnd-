@@ -31,6 +31,7 @@ export interface Responsepreload{
     state: string;
   }
   export interface ValidateDto{
+    detail: string;
     ln: number;
     cl: number;
     ms: string;
