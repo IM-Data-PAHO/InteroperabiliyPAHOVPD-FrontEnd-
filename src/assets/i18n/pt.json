@@ -27,5 +27,7 @@
     "End date cannot be greater than start date": "A data de término não pode ser maior que a data de início",
     "An error occurred Please try again": "Ocorreu um erro. Por favor, tente novamente",
     "The file could not be processed for the following reasons:": "O arquivo não pôde ser processado pelos seguintes motivos: \n",
-    "The file was successfully processed": "O arquivo foi processado com sucesso"
+    "The file was successfully processed": "O arquivo foi processado com sucesso",
+    "The file contains data errors":"O arquivo contém erros de dados",
+    "dtformat": "Formato de data"    
 }

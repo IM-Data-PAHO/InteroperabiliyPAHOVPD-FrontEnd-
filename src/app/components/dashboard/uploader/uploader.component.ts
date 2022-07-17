@@ -28,7 +28,7 @@ export class UploaderComponent implements OnInit {
   uploadFile01!: Array<File>
   file01!: File; 
   loading=false;
-  displayedColumns: string[] = ['detail','ln', 'cl', 'ms', 'value'];
+  displayedColumns: string[] = ['id','detail','ln', 'cl', 'ms','errortype' ,'value'];
   ValidateDto! :  ValidateDto[];
   dataSource = new MatTableDataSource(this.ValidateDto);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -96,7 +96,10 @@ export class UploaderComponent implements OnInit {
       this.dataSource= new MatTableDataSource(this.ValidateDto);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+     if(this.dataSource.data.length == 0)
       this.translate.get('The file was successfully processed').subscribe((res: string) => { swal.fire(res); });
+     else
+       this.translate.get('The file contains data errors').subscribe((res: string) => { swal.fire(res); });
     // }
 
     },error=>{

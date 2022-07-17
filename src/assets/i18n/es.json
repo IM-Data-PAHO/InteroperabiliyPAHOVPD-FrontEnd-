@@ -28,6 +28,6 @@
     "An error occurred Please try again": "Ocurrio un error Intente de nuevo",
     "The file could not be processed for the following reasons:": "No se pudo procesar el archivo  por los siguientes motivos: \n",
     "The file was successfully processed": "El archivo se proceso Exitosamente",
-    "INVALID": "Invalido",
-    "OPTION INVALID":"Opción inválida"
+    "The file contains data errors":"El archivo contiene errores de datos",
+    "dtformat": "Formato de fecha"    
 }
