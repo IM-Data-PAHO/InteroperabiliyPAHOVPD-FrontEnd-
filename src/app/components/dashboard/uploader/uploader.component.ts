@@ -1,8 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { matFormFieldAnimations } from '@angular/material/form-field';
-import { from } from 'rxjs';
-import { Programs, selectPrograms,Program, periodo, Responsepreload, ValidateDto } from 'src/app/shared/Models/selectPrograms';
+import { Program, periodo, Responsepreload, ValidateDto } from 'src/app/shared/Models/selectPrograms';
 import { LoginService } from 'src/app/shared/services/login/login.service';
 import { UploaderService } from 'src/app/shared/services/uploader/uploader.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,7 +8,6 @@ import swal from'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-
 
 @Component({
   selector: 'app-uploader',

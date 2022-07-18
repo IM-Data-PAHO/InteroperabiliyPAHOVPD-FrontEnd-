@@ -29,5 +29,11 @@
     "The file could not be processed for the following reasons:": "No se pudo procesar el archivo  por los siguientes motivos: \n",
     "The file was successfully processed": "El archivo se proceso Exitosamente",
     "The file contains data errors":"El archivo contiene errores de datos",
-    "dtformat": "Formato de fecha"    
+    "dtformat": "Formato de fecha",
+    "detail":"Detalle",
+    "ln":"Linea",
+    "cl":"Columna",
+    "ms":"Mensaje",
+    "errortype":"Tipo de Error",
+    "value":"Valor"
 }

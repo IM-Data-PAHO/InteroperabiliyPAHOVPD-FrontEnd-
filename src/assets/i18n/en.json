@@ -27,7 +27,13 @@
     "End date cannot be greater than start date": "End date cannot be greater than start date",
     "An error occurred Please try again": "An error occurred Please try again",
     "The file could not be processed for the following reasons:": "The file could not be processed for the following reasons: \n",
-    "The file was successfully processed": "The file was successfully processed"
-
-
+    "The file was successfully processed": "The file was successfully processed",
+    "The file contains data errors":"The file contains data errors",
+    "dtformat": "Date format",
+    "detail":"Detail",
+    "ln":"Line",
+    "cl":"Column",
+    "ms":"Message",
+    "errortype":"Bug Type",
+    "value":"Value"    
 }
