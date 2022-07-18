@@ -6,6 +6,7 @@ import { UploaderService } from 'src/app/shared/services/uploader/uploader.servi
 import { TranslateService } from '@ngx-translate/core';
 import swal from'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 
