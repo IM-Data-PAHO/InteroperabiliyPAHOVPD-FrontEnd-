@@ -35,5 +35,7 @@
     "cl":"Columna",
     "ms":"Mensaje",
     "errortype":"Tipo de Error",
-    "value":"Valor"
+    "value":"Valor",
+    "case_id":"Case ID",
+    "names":"Nombres",
 }

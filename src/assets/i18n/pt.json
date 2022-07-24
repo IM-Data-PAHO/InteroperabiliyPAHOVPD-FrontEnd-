@@ -35,5 +35,7 @@
     "cl":"Coluna",
     "ms":"Mensagem",
     "errortype":"Tipo de Erro",
-    "value":"VaValor"   
+    "value":"VaValor",
+    "case_id":"Case ID",
+    "names":"Nomes"   
 }

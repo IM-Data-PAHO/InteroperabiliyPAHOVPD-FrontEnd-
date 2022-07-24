@@ -22,7 +22,7 @@ export interface PeriodicElement {
 export class HistoryComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['idRegistro', 'programId', 'usuario', 'estado', 'fecha', 'acciones'];
+  displayedColumns: string[] = ['idRegistro', 'programId', 'usuario', 'estado','jsonSet', 'fecha', 'acciones'];
   historyData! :  History[];
   dataSource = new MatTableDataSource(this.historyData);
   constructor(private _uploaderService : UploaderService, private _login : LoginService) { }
@@ -45,6 +45,7 @@ export class HistoryComponent implements OnInit {
       this.dataSource= new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      //console.log(JSON.parse(this.historyData[1].jsonSet))
  
     });
     

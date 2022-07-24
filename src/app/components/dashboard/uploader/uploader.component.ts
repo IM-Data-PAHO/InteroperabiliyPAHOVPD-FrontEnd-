@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Program, periodo, Responsepreload, ValidateDto } from 'src/app/shared/Models/selectPrograms';
+import { Program, periodo, Responsepreload, ValidateDto, SumaryerrorDto } from 'src/app/shared/Models/selectPrograms';
 import { LoginService } from 'src/app/shared/services/login/login.service';
 import { UploaderService } from 'src/app/shared/services/uploader/uploader.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -26,13 +26,16 @@ export class UploaderComponent implements OnInit {
   uploadFile01!: Array<File>
   file01!: File; 
   loading=false;
-  displayedColumns: string[] = ['id','detail','ln', 'cl', 'ms','errortype' ,'value'];
+  displayedColumns: string[] = ['indexpreload','id','detail','ln', 'cl', 'ms','errortype' ,'value'];
+  displayedColumnssumary: string[] = ['date','mandatory','compulsory','option'];
   ValidateDto! :  ValidateDto[];
+  SumaryDto! : SumaryerrorDto[];
   dataSource = new MatTableDataSource(this.ValidateDto);
+  dataSourcesumary = new MatTableDataSource(this.SumaryDto);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private _uploaderService : UploaderService, private fb: FormBuilder, private _login : LoginService, public translate: TranslateService) {
-    this.form = this.fb.group({
+      this.form = this.fb.group({
       program: ['', Validators.required],
       attachment: ['', Validators.required],
       startdate:['', Validators.required],
@@ -90,10 +93,18 @@ export class UploaderComponent implements OnInit {
       this.loading=false;
       this.listresponse = result;
       this.ValidateDto = this.listresponse.response;
-      console.log("result: "+ JSON.stringify(this.listresponse.response));
+      this.SumaryDto = this.listresponse.sumary;
+      console.log( JSON.stringify(this.listresponse.sumary));
+      console.log( this.SumaryDto);
       this.dataSource= new MatTableDataSource(this.ValidateDto);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+
+      this.dataSourcesumary= new MatTableDataSource(this.SumaryDto);
+      this.dataSourcesumary.paginator = this.paginator;
+      this.dataSourcesumary.sort = this.sort;
+
+
      if(this.dataSource.data.length == 0)
       this.translate.get('The file was successfully processed').subscribe((res: string) => { swal.fire(res); });
      else

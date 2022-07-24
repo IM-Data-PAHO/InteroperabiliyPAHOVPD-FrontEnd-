@@ -29,8 +29,18 @@ export interface Responsepreload{
     deleted: number;
     response: ValidateDto[];
     state: string;
+    sumary: SumaryerrorDto[];
   }
+  export interface SumaryerrorDto{
+    date: number;
+    mandatoty: number;
+    compulsory: number;
+    option: number;
+  }
+
+
   export interface ValidateDto{
+    indexpreload: number;
     id: string;
     detail: string;
     ln: number;

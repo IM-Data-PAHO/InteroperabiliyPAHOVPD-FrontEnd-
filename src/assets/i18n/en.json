@@ -35,5 +35,7 @@
     "cl":"Column",
     "ms":"Message",
     "errortype":"Bug Type",
-    "value":"Value"    
+    "value":"Value",
+    "case_id":"Case ID",
+    "names":"Names"    
 }

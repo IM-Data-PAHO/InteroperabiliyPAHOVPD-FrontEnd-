@@ -62,35 +62,64 @@
                 </mat-step>
                 <mat-step label="{{ 'Preload' | translate }}">
                     <button mat-raised-button color="primary" class="loginElement button"  (click)="onPreupload()" [disabled]="form.invalid">{{ 'Validate' | translate }}</button>
+                   
+                    <div class="container" [hidden]="dataSourcesumary.data.length == 0">
+
+                        <table mat-table [dataSource]="dataSourcesumary" matSort  class="mat-elevation-z8"> 
+                            <ng-container matColumnDef="date">
+                                <th mat-header-cell *matHeaderCellDef> Date errors</th>
+                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.date}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="mandatory">
+                                <th mat-header-cell *matHeaderCellDef> Mandatory errors</th>
+                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.mandatory}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="compulsory">
+                                <th mat-header-cell *matHeaderCellDef> Compulsory errors</th>
+                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.compulsory }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="option">
+                                <th mat-header-cell *matHeaderCellDef> Option errors</th>
+                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.option}} </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnssumary" ></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnssumary;" ></tr>
+                        </table>
+                   </div> 
+                    <br>
                     <div class="container" [hidden]="dataSource.data.length == 0">
                          <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8" matTableExporter  #exporter="matTableExporter"> 
-                            <ng-container matColumnDef="id">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Item </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                                <ng-container matColumnDef="indexpreload">
+                                   <th mat-header-cell *matHeaderCellDef></th>
+                                   <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.indexpreload }}</td>
+                                </ng-container>
+                                <ng-container matColumnDef="id">
+                                    <th mat-header-cell *matHeaderCellDef> {{ 'case_id' | translate }} </th>
+                                    <td style="width:20% !important;" mat-cell *matCellDef="let element"> {{ element.id }} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="detail">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'detail' | translate }} </th>
-                                    <td mat-cell *matCellDef="let element"> {{ element.detail}} </td>
+                                    <th mat-header-cell *matHeaderCellDef> {{ 'names' | translate }} </th>
+                                    <td style="width:20% !important;" mat-cell *matCellDef="let element"> {{ element.detail}} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="ln">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'ln' | translate }} </th>
-                                    <td mat-cell *matCellDef="let element"> {{ element.ln}} </td>
+                                    <th mat-header-cell *matHeaderCellDef> {{ 'ln' | translate }} </th>
+                                    <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.ln }} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="cl">
-                                    <th mat-header-cell *matHeaderCellDef  mat-sort-header> {{ 'cl' | translate }} </th>
-                                    <td mat-cell *matCellDef="let element"> {{ element.cl}} </td>
+                                    <th mat-header-cell *matHeaderCellDef> {{ 'cl' | translate }} </th>
+                                    <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.cl }} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="ms">
-                                    <th mat-header-cell *matHeaderCellDef  mat-sort-header> {{ 'ms' | translate }} </th>
-                                    <td mat-cell *matCellDef="let element"> {{ element.ms}} </td>
+                                    <th mat-header-cell *matHeaderCellDef> {{ 'ms' | translate }} </th>
+                                    <td style="width:15% !important;" mat-cell *matCellDef="let element"> {{ element.ms }} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="errortype">
-                                    <th mat-header-cell *matHeaderCellDef  mat-sort-header> {{ 'errortype' | translate }} </th>
-                                    <td mat-cell *matCellDef="let element"> {{ element.errortype}} </td>
+                                    <th mat-header-cell *matHeaderCellDef> {{ 'errortype' | translate }} </th>
+                                    <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.errortype }} </td>
                                 </ng-container>
                                 <ng-container matColumnDef="value">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'value' | translate }} </th>
-                                    <td mat-cell *matCellDef="let element"> {{ element.value}} </td>
+                                    <th mat-header-cell *matHeaderCellDef> {{ 'value' | translate }} </th>
+                                    <td style="width:8% !important;"  mat-cell *matCellDef="let element"> {{ element.value }} </td>
                                 </ng-container> 
                     
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
@@ -102,7 +131,6 @@
                                 <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('json')">Export To json</button>
                                 <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('txt')">Export To txt</button>
                             </div>
-                            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator> -->
                     </div>   
               
                     <div>
