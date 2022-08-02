@@ -138,10 +138,7 @@ export class UploaderComponent implements OnInit {
     this._uploaderService.uploadFile(formData).subscribe(result =>{
     //console.log("result: "+ JSON.stringify(result))
       let mensaje = '';
-      if (!result){
-        //  mensaje = 'El archivo se proceso Exitosamente';
-        //  this.loading=false;
-        //  return swal.fire(mensaje);
+      if (!result){        
         this.loading=false;
         this.translate.get('The file was successfully processed').subscribe((res: string) => {
           swal.fire({
@@ -164,9 +161,9 @@ export class UploaderComponent implements OnInit {
             timer: 9000
           });
         });
-        this.clearUploadfile();
-        
-      //  return swal.fire('No se pudo procesar el archivo  por los siguientes motivos: \n'+ mensaje);
+          this.clearUploadfile();
+
+
     },error=>{
       this.loading=false;
       this.translate.get('An error occurred Please try again').subscribe((res: string) => {
@@ -178,9 +175,8 @@ export class UploaderComponent implements OnInit {
         this.clearUploadfile();
       });     
       
-      // return swal.fire('Ocurrio un error Intente de nuevo');
-    })
-    // this.clearUploadfile();
+    
+    })    
   }
   onFileSelected(e:any){
     if(e.target.id=="file")
@@ -199,8 +195,8 @@ export class UploaderComponent implements OnInit {
       }
     }
   }
-  
+
  clearUploadfile(){
-  location.reload(); 
+  setTimeout(()=> location.reload(), 9000)
  }
 }
