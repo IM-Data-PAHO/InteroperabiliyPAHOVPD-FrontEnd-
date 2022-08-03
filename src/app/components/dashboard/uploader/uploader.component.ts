@@ -124,11 +124,13 @@ export class UploaderComponent implements OnInit {
   onUpload(){
     this.loading=true;
     const file: File = this.uploadFile[0];
-   // const file01: File = this.uploadFile01[0];
     let formData = new FormData();
     formData.append('Programsid', this.form.value.program);
     formData.append( 'CsvFile', file, file.name);
-    // formData.append( 'CsvFile01', file01, file01.name);
+    if(this.uploadFile01){
+      const file01: File = this.uploadFile01[0];
+      formData.append( 'CsvFile01', file01, file01.name);
+    }    
     formData.append( 'UserLogin',  this._login.getUsuario() );
     formData.append( 'startdate', this.form.value.startdate);
     formData.append( 'enddate', this.form.value.enddate);
@@ -136,14 +138,16 @@ export class UploaderComponent implements OnInit {
     this._uploaderService.uploadFile(formData).subscribe(result =>{
     //console.log("result: "+ JSON.stringify(result))
       let mensaje = '';
-      if (!result){
-        //  mensaje = 'El archivo se proceso Exitosamente';
-        //  this.loading=false;
-        //  return swal.fire(mensaje);
+      if (!result){        
         this.loading=false;
         this.translate.get('The file was successfully processed').subscribe((res: string) => {
-          swal.fire(res);
+          swal.fire({
+            title: 'Success',
+            text: res,
+            timer: 9000
+          });
         });
+        this.clearUploadfile();
       }
       for (let i in result )
         {
@@ -151,17 +155,28 @@ export class UploaderComponent implements OnInit {
         }
         this.loading=false;
         this.translate.get('The file could not be processed for the following reasons' + mensaje).subscribe((res: string) => {
-          swal.fire(res);
+          swal.fire({
+            title: 'Warning',
+            text: res,
+            timer: 9000
+          });
         });
-      //  return swal.fire('No se pudo procesar el archivo  por los siguientes motivos: \n'+ mensaje);
+          this.clearUploadfile();
+
+
     },error=>{
       this.loading=false;
       this.translate.get('An error occurred Please try again').subscribe((res: string) => {
-        swal.fire(res);
-      });
-      // return swal.fire('Ocurrio un error Intente de nuevo');
-    })
-
+        swal.fire({
+          title: 'Error',
+          text: res,
+          timer: 9000
+        });
+        this.clearUploadfile();
+      });     
+      
+    
+    })    
   }
   onFileSelected(e:any){
     if(e.target.id=="file")
@@ -180,4 +195,8 @@ export class UploaderComponent implements OnInit {
       }
     }
   }
+
+ clearUploadfile(){
+  setTimeout(()=> location.reload(), 9000)
+ }
 }

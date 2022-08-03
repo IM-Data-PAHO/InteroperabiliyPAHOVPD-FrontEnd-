@@ -20,20 +20,22 @@
                     <div>
                         <mat-label>{{ 'Upload CSV(Clinical and Vaccination / Investigation / Classification)'| translate}}</mat-label>
                     </div>
-                    <div> <input class="btn" (change)="onFileSelected($event)" requiredFiel formControlName="attachment" #fileInput type="file" id="file" accept=".xlsx,.cvs,.xls"></div>
+                    <div> <input class="btn" (change)="onFileSelected($event)" requiredFiel formControlName="attachment" #fileInput type="file" id="file" accept=".xlsx,.csv,.xls"></div>
                     <div>
                         <button mat-button matStepperPrevious>{{ 'Back' | translate }}</button>
                         <button mat-button matStepperNext>{{ 'Next' | translate }}</button>
                     </div>
                 </mat-step>
-                <!-- <mat-step label="Cargar CSV(Laboratory)">
-                  <div><mat-label>Cargar CSV(Laboratory)</mat-label></div>
-                    <input class="btn" (change)="onFileSelected($event)"  formControlName="attachment" #fileInput type="file" id="file01">
+                <mat-step label="Cargar CSV(Laboratory)">
                     <div>
-                      <button mat-button matStepperPrevious>Back</button>
-                      <button mat-button matStepperNext>Next</button>
-                    </div> -->
-                <!-- </mat-step> -->
+                        <mat-label>Cargar CSV(Laboratory)</mat-label>
+                    </div>
+                    <input class="btn" (change)="onFileSelected($event)" formControlName="attachment" #fileInput type="file" id="file01" accept=".xlsx,.csv,.xls">
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
                 <mat-step label="{{ 'Period' | translate }}">
                     <div>
                         <mat-form-field appearance="fill">
@@ -61,11 +63,11 @@
                     </div>
                 </mat-step>
                 <mat-step label="{{ 'Preload' | translate }}">
-                    <button mat-raised-button color="primary" class="loginElement button"  (click)="onPreupload()" [disabled]="form.invalid">{{ 'Validate' | translate }}</button>
-                   
+                    <button mat-raised-button color="primary" class="loginElement button" (click)="onPreupload()" [disabled]="form.invalid">{{ 'Validate' | translate }}</button>
+
                     <div class="container" [hidden]="dataSourcesumary.data.length == 0">
 
-                        <table mat-table [dataSource]="dataSourcesumary" matSort  class="mat-elevation-z8"> 
+                        <table mat-table [dataSource]="dataSourcesumary" matSort class="mat-elevation-z8">
                             <ng-container matColumnDef="date">
                                 <th mat-header-cell *matHeaderCellDef> Date errors</th>
                                 <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.date}} </td>
@@ -82,57 +84,57 @@
                                 <th mat-header-cell *matHeaderCellDef> Option errors</th>
                                 <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.option}} </td>
                             </ng-container>
-                            <tr mat-header-row *matHeaderRowDef="displayedColumnssumary" ></tr>
-                            <tr mat-row *matRowDef="let row; columns: displayedColumnssumary;" ></tr>
+                            <tr mat-header-row *matHeaderRowDef="displayedColumnssumary"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumnssumary;"></tr>
                         </table>
-                   </div> 
+                    </div>
                     <br>
                     <div class="container" [hidden]="dataSource.data.length == 0">
-                         <table mat-table [dataSource]="dataSource" matSort  class="mat-elevation-z8" matTableExporter  #exporter="matTableExporter"> 
-                                <ng-container matColumnDef="indexpreload">
-                                   <th mat-header-cell *matHeaderCellDef></th>
-                                   <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.indexpreload }}</td>
-                                </ng-container>
-                                <ng-container matColumnDef="id">
-                                    <th mat-header-cell *matHeaderCellDef> {{ 'case_id' | translate }} </th>
-                                    <td style="width:20% !important;" mat-cell *matCellDef="let element"> {{ element.id }} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="detail">
-                                    <th mat-header-cell *matHeaderCellDef> {{ 'names' | translate }} </th>
-                                    <td style="width:20% !important;" mat-cell *matCellDef="let element"> {{ element.detail}} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="ln">
-                                    <th mat-header-cell *matHeaderCellDef> {{ 'ln' | translate }} </th>
-                                    <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.ln }} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="cl">
-                                    <th mat-header-cell *matHeaderCellDef> {{ 'cl' | translate }} </th>
-                                    <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.cl }} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="ms">
-                                    <th mat-header-cell *matHeaderCellDef> {{ 'ms' | translate }} </th>
-                                    <td style="width:15% !important;" mat-cell *matCellDef="let element"> {{ element.ms }} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="errortype">
-                                    <th mat-header-cell *matHeaderCellDef> {{ 'errortype' | translate }} </th>
-                                    <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.errortype }} </td>
-                                </ng-container>
-                                <ng-container matColumnDef="value">
-                                    <th mat-header-cell *matHeaderCellDef> {{ 'value' | translate }} </th>
-                                    <td style="width:8% !important;"  mat-cell *matCellDef="let element"> {{ element.value }} </td>
-                                </ng-container> 
-                    
-                                <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
-                                <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
-                            </table>
-                            <div class="form-group">
-                                <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx', {fileName:'PreloadLog'})">Export to xlsx</button>
-                                <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('csv')">Export To csv</button>
-                                <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('json')">Export To json</button>
-                                <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('txt')">Export To txt</button>
-                            </div>
-                    </div>   
-              
+                        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
+                            <ng-container matColumnDef="indexpreload">
+                                <th mat-header-cell *matHeaderCellDef></th>
+                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.indexpreload }}</td>
+                            </ng-container>
+                            <ng-container matColumnDef="id">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'case_id' | translate }} </th>
+                                <td style="width:20% !important;" mat-cell *matCellDef="let element"> {{ element.id }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="detail">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'names' | translate }} </th>
+                                <td style="width:20% !important;" mat-cell *matCellDef="let element"> {{ element.detail}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ln">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'ln' | translate }} </th>
+                                <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.ln }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="cl">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'cl' | translate }} </th>
+                                <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.cl }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="ms">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'ms' | translate }} </th>
+                                <td style="width:15% !important;" mat-cell *matCellDef="let element"> {{ element.ms }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="errortype">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'errortype' | translate }} </th>
+                                <td style="width:5% !important;" mat-cell *matCellDef="let element"> {{ element.errortype }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="value">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'value' | translate }} </th>
+                                <td style="width:8% !important;" mat-cell *matCellDef="let element"> {{ element.value }} </td>
+                            </ng-container>
+
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <div class="form-group">
+                            <button mat-raised-button color="primary" (click)="exporter.exportTable('xlsx', {fileName:'PreloadLog'})">Export to xlsx</button>
+                            <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('csv')">Export To csv</button>
+                            <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('json')">Export To json</button>
+                            <button id="export" mat-raised-button color="primary" (click)="exporter.exportTable('txt')">Export To txt</button>
+                        </div>
+                    </div>
+
                     <div>
                         <button mat-button matStepperPrevious>{{ 'Back' | translate }}</button>
                         <button mat-button matStepperNext>{{ 'Next' | translate }}</button>

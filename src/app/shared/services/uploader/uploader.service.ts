@@ -20,7 +20,8 @@ export class UploaderService {
 
 
   uploadFile(param: any) : Observable<any>{
-    return this._http.post<any>(Connection.ENDPOINTBACK + 'history', param);
+    let url = this._http.post<any>(Connection.ENDPOINTBACK + 'history', param);
+    return url;
       
   }
   preuploadFile(param: any) : Observable<any>{
