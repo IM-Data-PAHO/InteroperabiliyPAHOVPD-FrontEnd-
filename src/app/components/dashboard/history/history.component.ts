@@ -31,16 +31,17 @@ export class HistoryComponent implements OnInit {
 
   ngOnInit(): void {
     const usuario= this._login.getUsuario();  
-    this.getHistory(usuario);
+    const tokenuser= this._login.getToken();
+    this.getHistory(usuario, tokenuser);
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  getHistory(user:string){
+  getHistory(user:string, token:string){
     
-    this._uploaderService.getHistoryUser(user).subscribe(result =>{    
+    this._uploaderService.getHistoryUser(user, token).subscribe(result =>{    
       this.historyData = result;
       this.dataSource= new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;

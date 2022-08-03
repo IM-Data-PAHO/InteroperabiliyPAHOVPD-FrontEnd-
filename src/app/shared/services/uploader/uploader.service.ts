@@ -29,9 +29,10 @@ export class UploaderService {
       
   }
 
-  getHistoryUser(user: string) : Observable<History[]>{
- 
-    return this._http.get<History[]>(Connection.ENDPOINTBACK + 'history/user?user='+user);
+  getHistoryUser(user: string, token: string) : Observable<History[]>{
+  
+    //console.log("URL: "+Connection.ENDPOINTBACK + 'history/user?user='+user+'&token='+token)
+    return this._http.get<History[]>(Connection.ENDPOINTBACK + 'history/user?user='+user+'&token='+token);
   }
 
 }
