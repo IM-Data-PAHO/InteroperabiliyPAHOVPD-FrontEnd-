@@ -1,8 +1,8 @@
 .option-card {
     max-width: 100%;
-  }
+}
 
-  .body{
+.body {
     display: flex;
     justify-content: left;
     height: 100%;
@@ -11,14 +11,29 @@
     padding: 2%;
     padding-left: 4%;
     padding-right: 4%;
-  }
-  .card{
-    width: 100%;   
+}
+
+.card {
+    width: 100%;
     text-align: left;
-  }
-  .input_examinar{
-      width: 300%;
-  }
-  .spinner{
-    margin: 0 auto ;
-  }
+}
+
+.input_examinar {
+    width: 300%;
+}
+
+.spinner {
+    margin: 0 auto;
+}
+
+.div_center {
+    width: 600px;
+    height: 800px;
+    margin: 0 auto;
+    justify-content: center;
+}
+
+.labelmessage {
+    font-size: 0.7rem;
+    color: gray;
+}

@@ -30,6 +30,10 @@ export class UploaderComponent implements OnInit {
   displayedColumnssumary: string[] = ['date','mandatory','compulsory','option'];
   ValidateDto! :  ValidateDto[];
   SumaryDto! : SumaryerrorDto[];
+  element: any;
+  elementFile: any;
+  check1: any;
+  check2: any;
   dataSource = new MatTableDataSource(this.ValidateDto);
   dataSourcesumary = new MatTableDataSource(this.SumaryDto);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -140,7 +144,7 @@ export class UploaderComponent implements OnInit {
       let mensaje = '';
       if (!result){        
         this.loading=false;
-        this.translate.get('The file was successfully processed').subscribe((res: string) => {
+        this.translate.get('The file was processed successfully, please keep an eye on your email to follow up on the import').subscribe((res: string) => {
           swal.fire({
             title: 'Success',
             text: res,
@@ -149,6 +153,7 @@ export class UploaderComponent implements OnInit {
         });
         this.clearUploadfile();
       }
+      if(result){ 
       for (let i in result )
         {
           mensaje = mensaje + result[i].errorMessage + '\n ' ; 
@@ -162,11 +167,11 @@ export class UploaderComponent implements OnInit {
           });
         });
           this.clearUploadfile();
-
+        }
 
     },error=>{
       this.loading=false;
-      this.translate.get('An error occurred Please try again').subscribe((res: string) => {
+      this.translate.get('The file contains data errors, please keep an eye on your email to follow up on the import').subscribe((res: string) => {
         swal.fire({
           title: 'Error',
           text: res,
@@ -184,6 +189,22 @@ export class UploaderComponent implements OnInit {
     if (e.target.id =="file01")
       this.uploadFile01 = e.target.files;
   }
+  onCheckFile(e:any){
+    this.element = document.getElementById("DivLab");
+    this.elementFile = document.getElementById("DivFile");
+    this.check1 = document.getElementById("rbCSV");
+    this.check2 = document.getElementById("rbExcel");
+    if (!this.check1.checked && this.check2.checked) {
+      
+        this.elementFile.style.display='block';
+        this.element.style.display='none';
+    }
+    else {
+      this.element.style.display='block';
+      this.elementFile.style.display='block';
+    } 
+
+  }
 
   onValidationDate(){
     if(this.form.value.enddate){
@@ -194,6 +215,19 @@ export class UploaderComponent implements OnInit {
         });
       }
     }
+  }
+
+  onValidateFile(){
+    //  var uploader = document.getElementById("file")?.nodeValue;
+    var uploader = this.form.value.attachment;
+    var uploader1 = this.form.value.attachment1;
+     if(!uploader){
+      this.loading=false;
+      this.translate.get('You must upload a file').subscribe((res: string) => {
+        swal.fire(res);
+      });
+     }
+
   }
 
  clearUploadfile(){
