@@ -21,8 +21,7 @@ export interface PeriodicElement {
 })
 export class HistoryComponent implements OnInit {
 
-
-  displayedColumns: string[] = ['idRegistro', 'programId', 'usuario', 'estado','jsonSet', 'fecha', 'acciones'];
+  displayedColumns: string[] = ['idRegistro', 'country','programId', 'usuario', 'namefile','acciones','namefile1','acciones1','jsonSet', 'fecha'];
   historyData! :  History[];
   dataSource = new MatTableDataSource(this.historyData);
   constructor(private _uploaderService : UploaderService, private _login : LoginService) { }
@@ -46,7 +45,7 @@ export class HistoryComponent implements OnInit {
       this.dataSource= new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      //console.log(JSON.parse(this.historyData[1].jsonSet))
+      //console.log(this.historyData)
  
     });
     
@@ -60,15 +59,19 @@ export class HistoryComponent implements OnInit {
     }
   }
   descargar(i: number){
-    console.log("sedescargo " + this.historyData[i].file);
-    this.downloadFile(this.historyData[i].file, this.historyData[i].programsid)
+    console.log("sedescargo " + this.historyData[i].namefile);
+    this.downloadFile(this.historyData[i].file, this.historyData[i].namefile)
+  }
+  descargar1(i: number){
+    console.log("sedescargo " + this.historyData[i].namefile1);
+    this.downloadFile(this.historyData[i].file1, this.historyData[i].namefile1)
   }
   
   downloadFile(base64String :any, fileName: string) {
     const source = `data:application/octet-stream;base64,${base64String}`;
     const link = document.createElement("a");
     link.href = source;
-    link.download = `${fileName}.csv`
+    link.download = `${fileName}`
     link.click();
   }
  }

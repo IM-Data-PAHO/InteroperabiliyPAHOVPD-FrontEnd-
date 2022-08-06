@@ -33,6 +33,7 @@ export class LoginService {
   setToken(token: string, user: string){
     this._cookieService.set("token", token);
     this._cookieService.set("usuario", user);
+    this._cookieService.set("rol", user);
   }
 
   getToken(){
@@ -41,6 +42,10 @@ export class LoginService {
   getUsuario(){
     return this._cookieService.get("usuario");
   }
+  getRole(){
+  return this._cookieService.get("rol");
+  }
+
   logout(){
     this._cookieService.deleteAll();
     this._router.navigateByUrl('login');
