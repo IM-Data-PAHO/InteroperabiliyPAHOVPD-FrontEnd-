@@ -85,13 +85,18 @@ export class UploaderComponent implements OnInit {
     const file: File = this.uploadFile[0];
    // const file01: File = this.uploadFile01[0];
     let formData = new FormData();
+    var separator = (this.check0?this.check0:false);
     formData.append('Programsid', this.form.value.program);
     formData.append( 'CsvFile', file, file.name);
-    // formData.append( 'CsvFile01', file01, file01.name);
+    if(this.uploadFile01){
+      const file01: File = this.uploadFile01[0];
+      formData.append( 'CsvFile01', file01, file01.name);
+    }    
     formData.append( 'UserLogin',  this._login.getUsuario() );
     formData.append( 'startdate', this.form.value.startdate);
     formData.append( 'enddate', this.form.value.enddate);
     formData.append( 'token', this._login.getToken() );
+    formData.append( 'separator', this.separator );
     this._uploaderService.preuploadFile(formData).subscribe(result =>{
     //console.log("result: "+ JSON.stringify(result))
     let mensaje = '';
