@@ -32,8 +32,10 @@ export class UploaderComponent implements OnInit {
   SumaryDto! : SumaryerrorDto[];
   element: any;
   elementFile: any;
+  check0: any;
   check1: any;
   check2: any;
+  separator : any;
   dataSource = new MatTableDataSource(this.ValidateDto);
   dataSourcesumary = new MatTableDataSource(this.SumaryDto);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -129,6 +131,7 @@ export class UploaderComponent implements OnInit {
     this.loading=true;
     const file: File = this.uploadFile[0];
     let formData = new FormData();
+    var separator = (this.check0?this.check0:false);
     formData.append('Programsid', this.form.value.program);
     formData.append( 'CsvFile', file, file.name);
     if(this.uploadFile01){
@@ -139,6 +142,7 @@ export class UploaderComponent implements OnInit {
     formData.append( 'startdate', this.form.value.startdate);
     formData.append( 'enddate', this.form.value.enddate);
     formData.append( 'token', this._login.getToken() );
+    formData.append( 'separator', this.separator );
     this._uploaderService.uploadFile(formData).subscribe(result =>{
     //console.log("result: "+ JSON.stringify(result))
       let mensaje = '';
@@ -171,6 +175,11 @@ export class UploaderComponent implements OnInit {
 
     },error=>{
       this.loading=false;
+      let mensaje = '';
+      for (let i in error )
+        {
+          mensaje = mensaje + error[i].errorMessage + '\n ' ; 
+        }
       this.translate.get('The file contains data errors, please keep an eye on your email to follow up on the import').subscribe((res: string) => {
         swal.fire({
           title: 'Error',
@@ -192,16 +201,18 @@ export class UploaderComponent implements OnInit {
   onCheckFile(e:any){
     this.element = document.getElementById("DivLab");
     this.elementFile = document.getElementById("DivFile");
-    this.check1 = document.getElementById("rbCSV");
+    this.check0= document.getElementById("rbCSVComa");
+    this.check1 = document.getElementById("rbCSVPunto");
     this.check2 = document.getElementById("rbExcel");
-    if (!this.check1.checked && this.check2.checked) {
-      
+    if (!this.check0.checked && this.check2.checked || !this.check1.checked && this.check2.checked) {
         this.elementFile.style.display='block';
         this.element.style.display='none';
+        this.separator =null;        
     }
     else {
       this.element.style.display='block';
       this.elementFile.style.display='block';
+      this.check0.checked?this.separator = ',':this.separator =';'; 
     } 
 
   }

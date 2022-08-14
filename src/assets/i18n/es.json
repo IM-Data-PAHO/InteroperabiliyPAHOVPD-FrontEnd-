@@ -19,7 +19,7 @@
     "ID Program": "ID Programa",
     "Program": "Programa",
     "Country": "País",
-    "File name":"Nombre del archivo",
+    "File name": "Nombre del archivo",
     "User": "Usuario",
     "Date": "Fecha",
     "State": "Estado",
@@ -44,5 +44,7 @@
     "Select the type of file to import (required)": "Selecciona el archivo a importar (obligatorio)",
     "The file was processed successfully, please keep an eye on your email to follow up on the import": "El archivo se procesó con éxito, esté atento a su correo electrónico para realizar un seguimiento de la importación.",
     "You must upload a file": "Debes subir un archivo",
-    "This second file is OPTIONAL, it is only imported if you want to add information related to the Laboratory": "El segundo archivo es OPCIONAL, solo se importa si desea agregar información relacionada con el Laboratorio"
+    "This second file is OPTIONAL": "El segundo archivo es OPCIONAL",
+    "Upload File(Laboratory)": "Cargar Arhivo(Laboratorio)",
+    "These dates are related to the dtRashOnset field": "Estas fechas tienen relacion con el campo dtRashOnset"
 }

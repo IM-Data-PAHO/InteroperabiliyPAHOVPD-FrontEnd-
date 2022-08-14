@@ -22,8 +22,12 @@
                             <mat-label>{{ 'Select the type of file to import (required)'| translate}}</mat-label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input mdbRadio class="form-check-input" type="radio" name="inlineRadioOptions" id="rbCSV" value="option1" (change)="onCheckFile($event)" />
-                            <label class="form-check-label" for="inlineRadio1">CSV</label>
+                            <input mdbRadio class="form-check-input" type="radio" name="inlineRadioOptions" id="rbCSVComa" value="option0" (change)="onCheckFile($event)" />
+                            <label class="form-check-label" for="inlineRadio1">CSV (,)</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input mdbRadio class="form-check-input" type="radio" name="inlineRadioOptions" id="rbCSVPunto" value="option1" (change)="onCheckFile($event)" />
+                            <label class="form-check-label" for="inlineRadio1">CSV (;)</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input mdbRadio class="form-check-input" type="radio" name="inlineRadioOptions" id="rbExcel" value="option2" (change)="onCheckFile($event)" />
@@ -45,11 +49,11 @@
                         <br>
                         <div id="DivLab" style="display: none;">
                             <div>
-                                <mat-label>Cargar File(Laboratory)</mat-label>
+                                <mat-label>Upload File(Laboratory)</mat-label>
                             </div>
                             <input class="btn" (change)="onFileSelected($event)" formControlName="attachment1" #fileInput type="file" id="file01" accept=".xlsx,.csv,.xls">
                             <div>
-                                <mat-label class="labelmessage">{{ 'This second file is OPTIONAL, it is only imported if you want to add information related to the Laboratory'| translate}}</mat-label>
+                                <mat-label class="labelmessage">{{ 'This second file is OPTIONAL'| translate}}</mat-label>
                             </div>
                         </div>
                         <div>
@@ -58,6 +62,9 @@
                         </div>
                     </mat-step>
                     <mat-step label="{{ 'Period' | translate }}">
+                        <div>
+                            <mat-label class="labelmessage">{{ 'These dates are related to the dtRashOnset field'| translate}}</mat-label>
+                        </div>
                         <div>
                             <mat-form-field appearance="fill">
                                 <mat-label>{{ 'Initial Period' | translate }}</mat-label>
