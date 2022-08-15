@@ -2,7 +2,7 @@
     <div class="card">
         <mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
         <form [formGroup]="form" *ngIf="!loading">
-            <div class="div_center">
+
                 <mat-vertical-stepper>
                     <mat-step label="{{ 'Select a program' | translate }}">
                         <mat-form-field appearance="fill">
@@ -176,7 +176,7 @@
                     </mat-step>
 
                 </mat-vertical-stepper>
-            </div>
+
         </form>
     </div>
 </div>
