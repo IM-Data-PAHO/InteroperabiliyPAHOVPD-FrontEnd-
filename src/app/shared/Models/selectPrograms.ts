@@ -30,12 +30,15 @@ export interface Responsepreload{
     response: ValidateDto[];
     state: string;
     sumary: SumaryerrorDto[];
+    totalFile1:number;
+    totalFile2:number;
   }
   export interface SumaryerrorDto{
     date: number;
     mandatoty: number;
     compulsory: number;
     option: number;
+    totalrows : number;
   }
 
 

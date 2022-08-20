@@ -38,6 +38,8 @@ export class UploaderComponent implements OnInit {
   separator : any;
   dataSource = new MatTableDataSource(this.ValidateDto);
   dataSourcesumary = new MatTableDataSource(this.SumaryDto);
+  err: string = '';
+  totalrows: number = 0;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   constructor(private _uploaderService : UploaderService, private fb: FormBuilder, private _login : LoginService, public translate: TranslateService) {
@@ -105,6 +107,8 @@ export class UploaderComponent implements OnInit {
       this.listresponse = result;
       this.ValidateDto = this.listresponse.response;
       this.SumaryDto = this.listresponse.sumary;
+      var uno = this.listresponse.totalFile1;
+      var dos = this.listresponse.totalFile2;
       console.log( JSON.stringify(this.listresponse.sumary));
       console.log( this.SumaryDto);
       this.dataSource= new MatTableDataSource(this.ValidateDto);
@@ -115,12 +119,11 @@ export class UploaderComponent implements OnInit {
       this.dataSourcesumary.paginator = this.paginator;
       this.dataSourcesumary.sort = this.sort;
 
-
-     if(this.dataSource.data.length == 0)
+     if(this.dataSource.data.length == 0 && this.listresponse.state == '200')
       this.translate.get('The file was successfully processed').subscribe((res: string) => { swal.fire(res); });
      else
-       this.translate.get('The file contains data errors').subscribe((res: string) => { swal.fire(res); });
-    // }
+      this.err = this.listresponse.state == '200'?'':this.listresponse.state;
+      this.translate.get('The file contains data errors '+ this.err.toString()).subscribe((res: string) => { swal.fire(res); });    
 
     },error=>{
       this.loading=false;
