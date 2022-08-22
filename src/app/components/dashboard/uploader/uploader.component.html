@@ -95,26 +95,30 @@
 
                     <div class="container" [hidden]="dataSourcesumary.data.length == 0">
 
-                        <table mat-table [dataSource]="dataSourcesumary" matSort class="mat-elevation-z8">
+                        <table mat-table [dataSource]="dataSourcesumary" matSort class="mat-elevation-z8" style="width:100% !important;">
                             <ng-container matColumnDef="date">
                                 <th mat-header-cell *matHeaderCellDef> Date errors</th>
-                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.date}} </td>
+                                <td style="width:16% !important;" mat-cell *matCellDef="let element"> {{ element.date}} </td>
                             </ng-container>
                             <ng-container matColumnDef="mandatory">
                                 <th mat-header-cell *matHeaderCellDef> Mandatory errors</th>
-                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.mandatory}} </td>
+                                <td style="width:16% !important;" mat-cell *matCellDef="let element"> {{ element.mandatory}} </td>
                             </ng-container>
                             <ng-container matColumnDef="compulsory">
                                 <th mat-header-cell *matHeaderCellDef> Compulsory errors</th>
-                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.compulsory }} </td>
+                                <td style="width:16% !important;" mat-cell *matCellDef="let element"> {{ element.compulsory }} </td>
                             </ng-container>
                             <ng-container matColumnDef="option">
                                 <th mat-header-cell *matHeaderCellDef> Option errors</th>
-                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.option}} </td>
+                                <td style="width:16% !important;" mat-cell *matCellDef="let element"> {{ element.option }} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="deletedEvents">
+                                <th mat-header-cell *matHeaderCellDef> {{ 'Records to update' | translate }} </th>
+                                <td style="width:16% !important;" mat-cell *matCellDef="let element"> {{ element.deletedEvents }} </td>
                             </ng-container>
                             <ng-container matColumnDef="totalrows">
-                                <th mat-header-cell *matHeaderCellDef> totalrows </th>
-                                <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.totalrows }} </td>
+                                <th mat-header-cell *matHeaderCellDef> {{ 'Records to import' | translate }}</th>
+                                <td style="width:20% !important;" mat-cell *matCellDef="let element"> {{ element.totalrows }} </td>
                             </ng-container>
                             <tr mat-header-row *matHeaderRowDef="displayedColumnssumary"></tr>
                             <tr mat-row *matRowDef="let row; columns: displayedColumnssumary;"></tr>
@@ -122,7 +126,7 @@
                     </div>
                     <br>
                     <div class="container" [hidden]="dataSource.data.length == 0">
-                        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matTableExporter #exporter="matTableExporter">
+                        <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" matTableExporter #exporter="matTableExporter" style="width:100% !important;">
                             <ng-container matColumnDef="indexpreload">
                                 <th mat-header-cell *matHeaderCellDef></th>
                                 <td style="width:6% !important;" mat-cell *matCellDef="let element"> {{ element.indexpreload }}</td>

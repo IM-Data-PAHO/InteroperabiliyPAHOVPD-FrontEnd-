@@ -27,7 +27,7 @@ export class UploaderComponent implements OnInit {
   file01!: File; 
   loading=false;
   displayedColumns: string[] = ['indexpreload','id','detail','ln', 'cl', 'ms','errortype' ,'value'];
-  displayedColumnssumary: string[] = ['date','mandatory','compulsory','option'];
+  displayedColumnssumary: string[] = ['date','mandatory','compulsory','option', 'deletedEvents','totalrows'];
   ValidateDto! :  ValidateDto[];
   SumaryDto! : SumaryerrorDto[];
   element: any;

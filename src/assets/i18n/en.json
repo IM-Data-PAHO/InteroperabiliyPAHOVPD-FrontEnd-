@@ -46,5 +46,7 @@
     "You must upload a file": "You must upload a file",
     "This second file is OPTIONAL": "This second file is OPTIONAL",
     "Upload File(Laboratory)": "Upload File(Laboratory)",
-    "These dates are related to the dtRashOnset field": "These dates are related to the dtRashOnset field"
+    "These dates are related to the dtRashOnset field": "These dates are related to the dtRashOnset field",
+    "Records to update": "Records to update",
+    "Records to import": "Records to import"
 }

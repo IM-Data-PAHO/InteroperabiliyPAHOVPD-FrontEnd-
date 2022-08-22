@@ -46,7 +46,9 @@
     "You must upload a file": "You must upload a file",
     "This second file is OPTIONAL": "Este segundo arquivo é OPCIONAL",
     "Upload File(Laboratory)": "Arregar Arquivo(Laboratório)",
-    "These dates are related to the dtRashOnset field": "Essas datas estão relacionadas ao campo dtRashOnset"
+    "These dates are related to the dtRashOnset field": "Essas datas estão relacionadas ao campo dtRashOnset",
+    "Records to update": "Registros para atualizar",
+    "Records to import": "Registros para importar"
 
 
 }

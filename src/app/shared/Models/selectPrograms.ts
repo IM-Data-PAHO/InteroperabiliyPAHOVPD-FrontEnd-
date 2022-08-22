@@ -39,6 +39,7 @@ export interface Responsepreload{
     compulsory: number;
     option: number;
     totalrows : number;
+    deletedEvents: number;
   }
 
 
