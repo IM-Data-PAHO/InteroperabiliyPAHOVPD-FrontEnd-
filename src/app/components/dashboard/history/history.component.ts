@@ -10,7 +10,7 @@ export interface PeriodicElement {
   name: string;
   position: number;
   weight: number;
-  symbol: string;
+  symbol: string;  
 }
 
 
@@ -24,6 +24,7 @@ export class HistoryComponent implements OnInit {
   displayedColumns: string[] = ['idRegistro', 'country','programId', 'usuario', 'namefile','acciones','namefile1','acciones1','jsonSet', 'fecha'];
   historyData! :  History[];
   dataSource = new MatTableDataSource(this.historyData);
+  loading=false;
   constructor(private _uploaderService : UploaderService, private _login : LoginService) { }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,12 +40,13 @@ export class HistoryComponent implements OnInit {
   }
 
   getHistory(user:string, token:string){
-    
+    this.loading=true;
     this._uploaderService.getHistoryUser(user, token).subscribe(result =>{    
       this.historyData = result;
       this.dataSource= new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.loading=false;
       //console.log(this.historyData)
  
     });

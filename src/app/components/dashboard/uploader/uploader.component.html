@@ -49,7 +49,7 @@
                     <br>
                     <div id="DivLab" style="display: none;">
                         <div>
-                            <mat-label>Upload File(Laboratory)</mat-label>
+                            <mat-label>{{ 'Upload File(Laboratory)' | translate }}</mat-label>
                         </div>
                         <input class="btn" (change)="onFileSelected($event)" formControlName="attachment1" #fileInput type="file" id="file01" accept=".xlsx,.csv,.xls">
                         <div>
@@ -57,8 +57,8 @@
                         </div>
                     </div>
                     <div>
-                        <button mat-button matStepperPrevious>Back</button>
-                        <button mat-button matStepperNext (click)="onValidateFile()">Next</button>
+                        <button mat-button matStepperPrevious>{{ 'Back' | translate }}</button>
+                        <button mat-button matStepperNext (click)="onValidateFile()">{{ 'Next' | translate }}</button>
                     </div>
                 </mat-step>
                 <mat-step label="{{ 'Period' | translate }}">
@@ -92,7 +92,7 @@
                 </mat-step>
                 <mat-step label="{{ 'Preload' | translate }}">
                     <button mat-raised-button color="primary" class="loginElement button" (click)="onPreupload()" [disabled]="form.invalid">{{ 'Validate' | translate }}</button>
-
+                    <mat-spinner *ngIf="loadingPreload" class="spinner" diameter="50"></mat-spinner>
                     <div class="container" [hidden]="dataSourcesumary.data.length == 0">
 
                         <table mat-table [dataSource]="dataSourcesumary" matSort class="mat-elevation-z8" style="width:100% !important;">
@@ -177,6 +177,7 @@
                     </div>
                 </mat-step>
                 <mat-step label="{{ 'Load' | translate }}">
+                    <mat-spinner *ngIf="loadingLoad" class="spinner" diameter="50"></mat-spinner>
                     <button mat-raised-button color="primary" class="loginElement button" type="submit" (click)="onUpload()" [disabled]="form.invalid">{{ 'Process' | translate }}</button>
                     <div>
                         <button mat-button matStepperPrevious>{{ 'Next' | translate }}</button>

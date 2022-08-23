@@ -26,6 +26,8 @@ export class UploaderComponent implements OnInit {
   uploadFile01!: Array<File>
   file01!: File; 
   loading=false;
+  loadingPreload=false;
+  loadingLoad=false;
   displayedColumns: string[] = ['indexpreload','id','detail','ln', 'cl', 'ms','errortype' ,'value'];
   displayedColumnssumary: string[] = ['date','mandatory','compulsory','option', 'deletedEvents','totalrows'];
   ValidateDto! :  ValidateDto[];
@@ -83,7 +85,7 @@ export class UploaderComponent implements OnInit {
     })
   }
   onPreupload(){
-    this.loading=true;
+    this.loadingPreload=true;
     const file: File = this.uploadFile[0];
    // const file01: File = this.uploadFile01[0];
     let formData = new FormData();
@@ -103,7 +105,7 @@ export class UploaderComponent implements OnInit {
     //console.log("result: "+ JSON.stringify(result))
     let mensaje = '';
     // if (!result){
-      this.loading=false;
+      this.loadingPreload=false;
       this.listresponse = result;
       this.ValidateDto = this.listresponse.response;
       this.SumaryDto = this.listresponse.sumary;
@@ -120,15 +122,27 @@ export class UploaderComponent implements OnInit {
       this.dataSourcesumary.sort = this.sort;
 
      if(this.dataSource.data.length == 0 && this.listresponse.state == '200')
-      this.translate.get('The file was successfully processed').subscribe((res: string) => { swal.fire(res); });
+      this.translate.get('The file was successfully processed').subscribe((res: string) => { swal.fire
+        ({title: 'Success',
+      text: res,
+      timer: 10000}); });
      else
+     { 
       this.err = this.listresponse.state == '200'?'':this.listresponse.state;
-      this.translate.get('The file contains data errors '+ this.err.toString()).subscribe((res: string) => { swal.fire(res); });    
+      this.translate.get('The file contains data errors'+ '  '+  this.err.toString()).subscribe((res: string) => { swal.fire(
+        {title: 'Error',
+        text: res,
+        timer: 10000}
+        ); });    
+     }
 
     },error=>{
-      this.loading=false;
+      this.loadingPreload=false;
       this.translate.get('An error occurred Please try again').subscribe((res: string) => {
-        swal.fire(res);
+        swal.fire( 
+          {title: 'Error',
+        text: res,
+        timer: 10000});
       });
       // return swal.fire('Ocurrio un error Intente de nuevo');
     })
@@ -136,7 +150,7 @@ export class UploaderComponent implements OnInit {
   }
 
   onUpload(){
-    this.loading=true;
+    this.loadingLoad=true;
     const file: File = this.uploadFile[0];
     let formData = new FormData();
     var separator = (this.check0?this.check0:false);
@@ -155,7 +169,7 @@ export class UploaderComponent implements OnInit {
     //console.log("result: "+ JSON.stringify(result))
       let mensaje = '';
       if (!result){        
-        this.loading=false;
+        this.loadingLoad=false;
         this.translate.get('The file was processed successfully, please keep an eye on your email to follow up on the import').subscribe((res: string) => {
           swal.fire({
             title: 'Success',
@@ -170,7 +184,7 @@ export class UploaderComponent implements OnInit {
         {
           mensaje = mensaje + result[i].errorMessage + '\n ' ; 
         }
-        this.loading=false;
+        this.loadingLoad=false;
         this.translate.get('The file could not be processed for the following reasons' + mensaje).subscribe((res: string) => {
           swal.fire({
             title: 'Warning',
@@ -182,7 +196,7 @@ export class UploaderComponent implements OnInit {
         }
 
     },error=>{
-      this.loading=false;
+      this.loadingLoad=false;
       let mensaje = '';
       for (let i in error )
         {

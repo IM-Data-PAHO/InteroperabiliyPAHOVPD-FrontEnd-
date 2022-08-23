@@ -2,73 +2,77 @@
     <mat-toolbar>
         <span>{{ 'History' | translate }}</span>
     </mat-toolbar>
+    <div class="dcenter">
+        <mat-spinner *ngIf="loading" class="spinner" diameter="50"></mat-spinner>
+    </div>
+    <div class="container" [hidden]="dataSource.data.length == 0">
+        <mat-form-field appearance="standard">
+            <mat-label>{{ 'Filter' | translate }}</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input autocomplete="off">
+        </mat-form-field>
 
-    <mat-form-field appearance="standard">
-        <mat-label>{{ 'Filter' | translate }}</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input autocomplete="off">
-    </mat-form-field>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort *ngIf="!loading">
 
-    <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" matSort>
+                <ng-container matColumnDef="idRegistro">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'ID Register' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="idRegistro">
-                <th mat-header-cell *matHeaderCellDef> {{ 'ID Register' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-            </ng-container>
+                <ng-container matColumnDef="country">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'Country' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.country}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="country">
-                <th mat-header-cell *matHeaderCellDef> {{ 'Country' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.country}} </td>
-            </ng-container>
+                <ng-container matColumnDef="programId">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'ID Program' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.programsid}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="programId">
-                <th mat-header-cell *matHeaderCellDef> {{ 'ID Program' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.programsid}} </td>
-            </ng-container>
+                <ng-container matColumnDef="usuario">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'User' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.userLogin}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="usuario">
-                <th mat-header-cell *matHeaderCellDef> {{ 'User' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.userLogin}} </td>
-            </ng-container>
+                <ng-container matColumnDef="fecha">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Date' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.fecha | date:'dd-MM-yyyy HH:mm:ss'}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="fecha">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ 'Date' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.fecha | date:'dd-MM-yyyy HH:mm:ss'}} </td>
-            </ng-container>
+                <ng-container matColumnDef="namefile">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'File name' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.namefile }} </td>
+                </ng-container>
+                <ng-container matColumnDef="acciones">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'Download' | translate }} </th>
+                    <td mat-cell *matCellDef="let element; let i = index " style=" text-align:center">
+                        <a class="pointer">
+                            <mat-icon (click)="descargar(i)" #tooltip="matTooltip" matTooltip="Descargar Archivo">download</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="namefile1">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'File name' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.namefile1 }} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="namefile">
-                <th mat-header-cell *matHeaderCellDef> {{ 'File name' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.namefile }} </td>
-            </ng-container>
-            <ng-container matColumnDef="acciones">
-                <th mat-header-cell *matHeaderCellDef> {{ 'Download' | translate }} </th>
-                <td mat-cell *matCellDef="let element; let i = index " style=" text-align:center">
-                    <a class="pointer">
-                        <mat-icon (click)="descargar(i)" #tooltip="matTooltip" matTooltip="Descargar Archivo">download</mat-icon>
-                    </a>
-                </td>
-            </ng-container>
-            <ng-container matColumnDef="namefile1">
-                <th mat-header-cell *matHeaderCellDef> {{ 'File name' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.namefile1 }} </td>
-            </ng-container>
+                <ng-container matColumnDef="jsonSet">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'detail' | translate }} </th>
+                    <td mat-cell *matCellDef="let element"> {{element.jsonSet}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="jsonSet">
-                <th mat-header-cell *matHeaderCellDef> {{ 'detail' | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.jsonSet}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="acciones1">
-                <th mat-header-cell *matHeaderCellDef> {{ 'Download' | translate }} </th>
-                <td mat-cell *matCellDef="let element; let i = index " style=" text-align:center">
-                    <a class="pointer">
-                        <mat-icon (click)="descargar1(i)" #tooltip="matTooltip" matTooltip="Descargar Archivo">download</mat-icon>
-                    </a>
-                </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+                <ng-container matColumnDef="acciones1">
+                    <th mat-header-cell *matHeaderCellDef> {{ 'Download' | translate }} </th>
+                    <td mat-cell *matCellDef="let element; let i = index " style=" text-align:center">
+                        <a class="pointer">
+                            <mat-icon (click)="descargar1(i)" #tooltip="matTooltip" matTooltip="Descargar Archivo">download</mat-icon>
+                        </a>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
     </div>
 </div>

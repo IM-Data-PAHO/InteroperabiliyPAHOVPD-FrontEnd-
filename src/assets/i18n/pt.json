@@ -12,7 +12,7 @@
     "Preload": "Validación Previa",
     "Validate": "Pré-validar",
     "History": "História",
-    "App Impodata": "App Impodatos",
+    "VPD Data Import": "Importação de dados VPD",
     "Process": "Processo",
     "Filter": "Filtro",
     "ID Register": "Cadastro de identidade",
@@ -48,7 +48,8 @@
     "Upload File(Laboratory)": "Arregar Arquivo(Laboratório)",
     "These dates are related to the dtRashOnset field": "Essas datas estão relacionadas ao campo dtRashOnset",
     "Records to update": "Registros para atualizar",
-    "Records to import": "Registros para importar"
+    "Records to import": "Registros para importar",
+    "The file contains data errors": "O arquivo contém erros de dados "
 
 
 }

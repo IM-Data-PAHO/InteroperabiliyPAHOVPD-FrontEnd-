@@ -1,22 +1,29 @@
 table {
     width: 100%;
-  }
+}
 
-  th{
-      width: auto;
-  }
-  td{
+th {
     width: auto;
-  }
-  .container{
-      margin: 1%;
-  }
-  .mat-form-field {
+}
+
+td {
+    width: auto;
+}
+
+.container {
+    margin: 1%;
+}
+
+.mat-form-field {
     font-size: 14px;
     width: auto;
-  }
-  .pointer{
-    cursor: pointer;
-  }
+}
 
-  
+.pointer {
+    cursor: pointer;
+}
+
+.dcenter {
+    display: flex;
+    justify-content: center;
+}
