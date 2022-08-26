@@ -123,14 +123,14 @@ export class UploaderComponent implements OnInit {
 
      if(this.dataSource.data.length == 0 && this.listresponse.state == '200')
       this.translate.get('The file was successfully processed').subscribe((res: string) => { swal.fire
-        ({title: 'Success',
+        ({
       text: res,
       timer: 10000}); });
      else
      { 
       this.err = this.listresponse.state == '200'?'':this.listresponse.state;
       this.translate.get('The file contains data errors'+ '  '+  this.err.toString()).subscribe((res: string) => { swal.fire(
-        {title: 'Error',
+        {
         text: res,
         timer: 10000}
         ); });    
@@ -140,8 +140,7 @@ export class UploaderComponent implements OnInit {
       this.loadingPreload=false;
       this.translate.get('An error occurred Please try again').subscribe((res: string) => {
         swal.fire( 
-          {title: 'Error',
-        text: res,
+          {text: res,
         timer: 10000});
       });
       // return swal.fire('Ocurrio un error Intente de nuevo');
@@ -172,7 +171,6 @@ export class UploaderComponent implements OnInit {
         this.loadingLoad=false;
         this.translate.get('The file was processed successfully, please keep an eye on your email to follow up on the import').subscribe((res: string) => {
           swal.fire({
-            title: 'Success',
             text: res,
             timer: 9000
           });
@@ -187,7 +185,6 @@ export class UploaderComponent implements OnInit {
         this.loadingLoad=false;
         this.translate.get('The file could not be processed for the following reasons' + mensaje).subscribe((res: string) => {
           swal.fire({
-            title: 'Warning',
             text: res,
             timer: 9000
           });
@@ -204,7 +201,6 @@ export class UploaderComponent implements OnInit {
         }
       this.translate.get('The file contains data errors, please keep an eye on your email to follow up on the import').subscribe((res: string) => {
         swal.fire({
-          title: 'Error',
           text: res,
           timer: 9000
         });

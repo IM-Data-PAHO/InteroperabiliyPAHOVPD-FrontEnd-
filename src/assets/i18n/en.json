@@ -49,5 +49,8 @@
     "These dates are related to the dtRashOnset field": "These dates are related to the dtRashOnset field",
     "Records to update": "Records to update",
     "Records to import": "Records to import",
-    "The file contains data errors": "The file contains data errors"
+    "The file contains data errors": "The file contains data errors",
+    "Warning": "Warning Process",
+    "Success": "Success Process",
+    "Error": "Error Process"
 }

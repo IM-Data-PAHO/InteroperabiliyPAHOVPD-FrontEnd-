@@ -11,7 +11,7 @@
     "Upload file": "Subir Archivo",
     "Preload": "Validación Previa",
     "History": "Historial",
-    "VPD Data Import": "Importacion de Datos VPD",
+    "VPD Data Import": "Importación de Datos VPD",
     "Process": "Procesar",
     "Validate": "Prevalidar",
     "Filter": "Filter",
@@ -48,6 +48,9 @@
     "Upload File(Laboratory)": "Cargar Archivo(Laboratorio)",
     "These dates are related to the dtRashOnset field": "Estas fechas tienen relacion con el campo dtRashOnset",
     "Records to update": "Registros a actualizar",
-    "Records to import": "Registros a importar"
+    "Records to import": "Registros a importar",
+    "Warning": "Advertencia",
+    "Success": "Proceso Exitoso",
+    "Error": "Proceso con Error"
 
 }
