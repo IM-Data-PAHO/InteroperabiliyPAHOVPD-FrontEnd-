@@ -52,7 +52,9 @@
     "The file contains data errors": "O arquivo contém erros de dados ",
     "Warning": "Processo de aviso",
     "Success": "Processo de sucesso",
-    "Error": "Processo de erro"
+    "Error": "Processo de erro",
+    "Errors": "Erros"
+
 
 
 }

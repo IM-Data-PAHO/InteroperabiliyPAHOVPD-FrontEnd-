@@ -52,5 +52,6 @@
     "The file contains data errors": "The file contains data errors",
     "Warning": "Warning Process",
     "Success": "Success Process",
-    "Error": "Error Process"
+    "Error": "Error Process",
+    "Errors": "Errors"
 }
