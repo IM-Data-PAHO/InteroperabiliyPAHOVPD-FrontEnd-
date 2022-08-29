@@ -1,18 +1,29 @@
 table {
-
     width: 100%;
-  }
+}
 
-  th{
-      width: 20%;
-  }
-  .container{
-      margin: 3%;
-  }
-  .mat-form-field {
+th {
+    width: auto;
+}
+
+td {
+    width: auto;
+}
+
+.container {
+    margin: 1%;
+}
+
+.mat-form-field {
     font-size: 14px;
-    width: 100%;
-  }
-  .pointer{
+    width: auto;
+}
+
+.pointer {
     cursor: pointer;
-  }
+}
+
+.dcenter {
+    display: flex;
+    justify-content: center;
+}

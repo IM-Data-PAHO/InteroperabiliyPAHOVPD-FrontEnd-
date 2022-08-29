@@ -16,6 +16,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatTableExporterModule } from 'mat-table-exporter';
 
 @NgModule({
   declarations: [    
@@ -38,6 +39,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatSortModule,
     MatTooltipModule,
     MatStepperModule,
+    MatTableExporterModule,
   ],
   exports:[
         
@@ -56,6 +58,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatSortModule,
     MatTooltipModule,
     MatStepperModule,
+    MatTableExporterModule,
   ]
 })
 export class SharedModule { }
