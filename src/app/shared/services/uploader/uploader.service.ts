@@ -20,13 +20,20 @@ export class UploaderService {
 
 
   uploadFile(param: any) : Observable<any>{
-    return this._http.post<any>(Connection.ENDPOINTBACK + 'history', param);
+    let url = this._http.post<any>(Connection.ENDPOINTBACK + 'history', param);
+    return url;
+      
+  }
+  preuploadFile(param: any) : Observable<any>{
+    console.log("Post: startDryRun")
+    return this._http.post<any>(Connection.ENDPOINTBACK + 'DhisIntegration/startDryRun', param);
       
   }
 
-  getHistoryUser(user: string) : Observable<History[]>{
- 
-    return this._http.get<History[]>(Connection.ENDPOINTBACK + 'history/user?user='+user);
+  getHistoryUser(user: string, token: string) : Observable<History[]>{
+  
+    //console.log("URL: "+Connection.ENDPOINTBACK + 'history/user?user='+user+'&token='+token)
+    return this._http.get<History[]>(Connection.ENDPOINTBACK + 'history/user?user='+user+'&token='+token);
   }
 
 }

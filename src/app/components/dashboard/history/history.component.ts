@@ -10,7 +10,7 @@ export interface PeriodicElement {
   name: string;
   position: number;
   weight: number;
-  symbol: string;
+  symbol: string;  
 }
 
 
@@ -21,30 +21,33 @@ export interface PeriodicElement {
 })
 export class HistoryComponent implements OnInit {
 
-
-  displayedColumns: string[] = ['idRegistro', 'programId', 'usuario', 'estado', 'fecha', 'acciones'];
+  displayedColumns: string[] = ['idRegistro', 'country','programId', 'usuario', 'namefile','acciones','namefile1','acciones1','jsonSet', 'fecha'];
   historyData! :  History[];
   dataSource = new MatTableDataSource(this.historyData);
+  loading=false;
   constructor(private _uploaderService : UploaderService, private _login : LoginService) { }
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   ngOnInit(): void {
     const usuario= this._login.getUsuario();  
-    this.getHistory(usuario);
+    const tokenuser= this._login.getToken();
+    this.getHistory(usuario, tokenuser);
   }
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
 
-  getHistory(user:string){
-    
-    this._uploaderService.getHistoryUser(user).subscribe(result =>{    
+  getHistory(user:string, token:string){
+    this.loading=true;
+    this._uploaderService.getHistoryUser(user, token).subscribe(result =>{    
       this.historyData = result;
       this.dataSource= new MatTableDataSource(result);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.loading=false;
+      //console.log(this.historyData)
  
     });
     
@@ -58,15 +61,19 @@ export class HistoryComponent implements OnInit {
     }
   }
   descargar(i: number){
-    console.log("sedescargo " + this.historyData[i].file);
-    this.downloadFile(this.historyData[i].file, this.historyData[i].programsid)
+    console.log("sedescargo " + this.historyData[i].namefile);
+    this.downloadFile(this.historyData[i].file, this.historyData[i].namefile)
+  }
+  descargar1(i: number){
+    console.log("sedescargo " + this.historyData[i].namefile1);
+    this.downloadFile(this.historyData[i].file1, this.historyData[i].namefile1)
   }
   
   downloadFile(base64String :any, fileName: string) {
     const source = `data:application/octet-stream;base64,${base64String}`;
     const link = document.createElement("a");
     link.href = source;
-    link.download = `${fileName}.csv`
+    link.download = `${fileName}`
     link.click();
   }
  }

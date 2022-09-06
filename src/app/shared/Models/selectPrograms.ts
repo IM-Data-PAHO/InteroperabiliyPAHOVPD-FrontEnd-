@@ -23,3 +23,33 @@ export interface Attributemapping {
     name:   string;
     column: string;
 }
+
+export interface Responsepreload{
+    uploads: number;
+    deleted: number;
+    response: ValidateDto[];
+    state: string;
+    sumary: SumaryerrorDto[];
+    totalFile1:number;
+    totalFile2:number;
+  }
+  export interface SumaryerrorDto{
+    date: number;
+    mandatoty: number;
+    compulsory: number;
+    option: number;
+    totalrows : number;
+    deletedEvents: number;
+  }
+
+
+  export interface ValidateDto{
+    indexpreload: number;
+    id: string;
+    detail: string;
+    ln: number;
+    cl: number;
+    ms: string;
+    errortype: string;
+    value: string;
+  }
