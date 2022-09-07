@@ -20,7 +20,7 @@ export class UploaderService {
 
 
   uploadFile(param: any) : Observable<any>{
-    let url = this._http.post<any>(Connection.ENDPOINTBACK + 'history', param);
+    let url = this._http.post<any>(Connection.ENDPOINTBACK + 'DataImport', param);
     return url;
       
   }
@@ -33,7 +33,7 @@ export class UploaderService {
   getHistoryUser(user: string, token: string) : Observable<History[]>{
   
     //console.log("URL: "+Connection.ENDPOINTBACK + 'history/user?user='+user+'&token='+token)
-    return this._http.get<History[]>(Connection.ENDPOINTBACK + 'history/user?user='+user+'&token='+token);
+    return this._http.get<History[]>(Connection.ENDPOINTBACK + 'DataImport/history?user='+user+'&token='+token);
   }
 
 }
