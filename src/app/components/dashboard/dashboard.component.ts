@@ -19,6 +19,9 @@ export class DashboardComponent implements OnInit {
     this.getLanguage()
   }
 
+  /*
+  *Función para la internacionalización del idioma 
+  */
   getLanguage(){
     this._loginService.getlanguage(this._loginService.getToken()).subscribe(data =>{
       this.selectedLanguage = data.settings.keyUiLocale? data.settings.keyUiLocale:this.selectedLanguage ;

@@ -12,7 +12,9 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+ /*
+  *Función que llama al servicio para cerrar la sesión 
+  */
   logout(){
     this._loginService.logout();
   }

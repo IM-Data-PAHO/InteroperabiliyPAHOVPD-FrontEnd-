@@ -38,7 +38,9 @@ export class HistoryComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
-
+ /*
+  *Función que llama al servicio  para ejecutar la pre-validación
+  */
   getHistory(user:string, token:string){
     this.loading=true;
     this._uploaderService.getHistoryUser(user, token).subscribe(result =>{    
@@ -47,11 +49,14 @@ export class HistoryComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       this.loading=false;
-      //console.log(this.historyData)
- 
+      //console.log(this.historyData) 
     });
     
   }
+
+  /*
+  *Función para el filtrar la data de la tabla del historial
+  */
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
@@ -60,15 +65,26 @@ export class HistoryComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  /*
+  *Función para descargar el primer archivo 
+  */
   descargar(i: number){
     console.log("sedescargo " + this.historyData[i].namefile);
     this.downloadFile(this.historyData[i].file, this.historyData[i].namefile)
   }
+
+  /*
+  *Función para descargar el segundo archivo 
+  */
   descargar1(i: number){
     console.log("sedescargo " + this.historyData[i].namefile1);
     this.downloadFile(this.historyData[i].file1, this.historyData[i].namefile1)
   }
   
+  /*
+  *Función para descargar 
+  */
   downloadFile(base64String :any, fileName: string) {
     const source = `data:application/octet-stream;base64,${base64String}`;
     const link = document.createElement("a");

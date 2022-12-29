@@ -26,7 +26,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+/*
+*Método que hace el llamado para endpoint del login
+**/
   ingresar(){
     let usuario : login ={
       username: this.form.value.user,
